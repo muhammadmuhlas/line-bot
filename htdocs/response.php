@@ -499,7 +499,7 @@ class Response {
 
 					// $this->botSendText($event, json_encode($event));
 
-					$this->botSendSticker($event, 570, 4010);
+					$this->botSendSticker($event, 1, 1);
 
 				}
 
