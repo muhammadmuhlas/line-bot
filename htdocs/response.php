@@ -513,7 +513,7 @@ class Response {
 
 					$data = $this->botReceiveSticker($event);
 
-					$this->botSendSticker($event, 4, 630);
+					$this->botSendSticker($event, 1, mt_rand(1, 17));
 
 				}
 
