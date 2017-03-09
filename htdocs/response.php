@@ -497,9 +497,9 @@ class Response {
 			// $save->bindParam('text', $text);
 			// $save->execute();
 
-			$stmt = $dbo->prepare("INSERT INTO logs (json) VALUES (?)");
-			$stmt->bindParam(1, "aa");
-			$stmt->execute();
+			// $stmt = $dbo->prepare("INSERT INTO logs (json) VALUES (?)");
+			// $stmt->bindParam(1, "aa");
+			// $stmt->execute();
 
 			// $save = $this->dbo->prepare('INSERT INTO logs(json) VALUES(:json)');
 			// $save->bindParam(':json', json_encode($event));
