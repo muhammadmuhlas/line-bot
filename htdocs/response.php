@@ -484,6 +484,10 @@ class Response {
 			$save->bindParam('text', $text);
 			$save->execute();
 
+			$save = $dbo->prepare('INSERT INTO logs(json) VALUES(:json)');
+			$save->bindParam(':json', json_encode($event));
+			$save->execute();
+
 			if ($this->botEventSourceIsUser($event)) {
 
 				if ($this->botIsReceiveText($event)) {
