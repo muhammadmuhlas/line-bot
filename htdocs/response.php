@@ -511,9 +511,7 @@ class Response {
 
 				if ($this->botIsReceiveSticker($event)) {
 
-					$data = $this->botReceiveSticker($event);
-
-					$this->botSendSticker($event, 1, mt_rand(1, 17));
+					$this->botSendSticker($event, 1, mt_rand(100, 139));
 
 				}
 
