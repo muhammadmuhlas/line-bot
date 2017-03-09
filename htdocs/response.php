@@ -501,7 +501,7 @@ class Response {
 
 					if ($this->botReceiveText($event) == "halo") {
 
-						$text    = "halo";
+						$text    = $this->botReceiveText($event);
 						$url     = "https://dummyimage.com/1024x1024/1abe9c/ffff.jpg&text=$text";
 						$prevUrl = "https://dummyimage.com/240x240/1abe9c/ffff.jpg&text=$text";
 
