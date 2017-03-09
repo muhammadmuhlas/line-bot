@@ -508,7 +508,7 @@ class Response {
 					// 	$this->botSendImage($event, $url, $prevUrl);
 					// }
 
-					$text    = $this->botReceiveText($event);
+					$text    = str_replace(' ', '+', $this->botReceiveText($event));
 					$url     = "https://dummyimage.com/1024x1024/1abe9c/ffff.jpg&text=$text";
 					$prevUrl = "https://dummyimage.com/240x240/1abe9c/ffff.jpg&text=$text";
 
