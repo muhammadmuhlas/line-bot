@@ -516,13 +516,12 @@ class Response {
 					$url       = "https://dummyimage.com/1024x1024/1abe9c/ffff.jpg&text=$text";
 					$prevUrl   = "https://dummyimage.com/240x240/1abe9c/ffff.jpg&text=$text";
 					$jsonEvent = json_encode($event);
-					$sql       = "INSERT INTO 'logs' ('json') VALUES ('$jsonEvent')";
-					$save      = $dbo->prepare($sql);
+					// $sql       = "INSERT INTO 'logs' ('json') VALUES ('$jsonEvent')";
+					// $save      = $dbo->prepare($sql);
+					// if ($save->execute()) {
 
-					if ($save->execute()) {
-
-						$this->botSendImage($event, $url, $prevUrl);
-					}
+					$this->botSendImage($event, $url, $prevUrl);
+					// }
 				}
 
 				if ($this->botIsReceiveSticker($event)) {
