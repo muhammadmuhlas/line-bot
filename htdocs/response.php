@@ -478,7 +478,7 @@ class Response {
 
 			if ($this->botEventSourceIsUser($event)) {
 
-				$response = $this->bot->replyText($event['replyToken'], "2");
+				// $response = $this->bot->replyText($event['replyToken'], "2");
 
 				if ($this->botIsReceiveText($event)) {
 
