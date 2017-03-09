@@ -208,7 +208,7 @@ class Response {
 	public function botSendText($event, $text) {
 
 		$input    = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($text);
-		$response = $bot->replyMessage($this->botEventReplyToken($event), $input);
+		$response = $this->bot->replyMessage($this->botEventReplyToken($event), $input);
 
 		if ($response->isSucceeded()) {
 
@@ -486,7 +486,7 @@ class Response {
 
 					if ($this->botReceiveText($event) == "halo") {
 
-						$response = $this->bot->replyText($event['replyToken'], "4");
+						// $response = $this->bot->replyText($event['replyToken'], "4");
 
 						$this->botSendText($event, "halo juga");
 
