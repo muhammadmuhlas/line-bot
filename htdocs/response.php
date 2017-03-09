@@ -474,19 +474,11 @@ class Response {
 
 		foreach ($this->botEventsRequestHandler() as $event) {
 
-			// $response = $this->bot->replyText($event['replyToken'], "1");
-
 			if ($this->botEventSourceIsUser($event)) {
-
-				// $response = $this->bot->replyText($event['replyToken'], "2");
 
 				if ($this->botIsReceiveText($event)) {
 
-					// $response = $this->bot->replyText($event['replyToken'], "3");
-
 					if ($this->botReceiveText($event) == "halo") {
-
-						// $response = $this->bot->replyText($event['replyToken'], "4");
 
 						$this->botSendText($event, "halo juga");
 						return $response->getHTTPStatus().' '.$response->getRawBody();
@@ -497,9 +489,28 @@ class Response {
 
 					$data = $this->botReceiveSticker($event);
 
-					// $this->botSendText($event, json_encode($event));
-
 					$this->botSendSticker($event, 1, 1);
+
+				}
+
+			}
+
+			if ($this->botEventSourceIsGroup($event)) {
+
+				if ($this->botIsReceiveText($event)) {
+
+					if ($this->botReceiveText($event) == "halo") {
+
+						$this->botSendText($event, "halo juga");
+						return $response->getHTTPStatus().' '.$response->getRawBody();
+					}
+				}
+
+				if ($this->botIsReceiveSticker($event)) {
+
+					$data = $this->botReceiveSticker($event);
+
+					$this->botSendSticker($event, 630, 4);
 
 				}
 
