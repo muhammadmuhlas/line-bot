@@ -514,6 +514,15 @@ class Response {
 
 				}
 
+				if ($this->botIsReceiveImage($event)) {
+
+					$text    = "hello";
+					$url     = "https://dummyimage.com/1024x1024/1abe9c/ffff.jpg&text=$text";
+					$prevUrl = "https://dummyimage.com/240x240/1abe9c/ffff.jpg&text=$text";
+
+					$this->botSendImage($event, $url, $prevUrl);
+
+				}
 			}
 		}
 	}
