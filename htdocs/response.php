@@ -207,15 +207,13 @@ class Response {
 	/*Send Content*/
 	public function botSendText($event, $text) {
 
-		$bot->replyText($this->botEventReplyToken($event), $text);
+		$input    = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($text);
+		$response = $bot->replyMessage($this->botEventReplyToken($event), $input);
 
-		// $input    = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($text);
-		// $response = $bot->replyMessage($this->botEventReplyToken($event), $input);
+		if ($response->isSucceeded()) {
 
-		// if ($response->isSucceeded()) {
-
-		// 	return true;
-		// }
+			return true;
+		}
 
 	}
 
@@ -476,11 +474,19 @@ class Response {
 
 		foreach ($this->botEventsRequestHandler() as $event) {
 
+			$response = $this->bot->replyText($event['replyToken'], "1");
+
 			if ($this->botEventSourceIsUser($event)) {
+
+				$response = $this->bot->replyText($event['replyToken'], "2");
 
 				if ($this->botIsReceiveText($event)) {
 
+					$response = $this->bot->replyText($event['replyToken'], "3");
+
 					if ($this->botReceiveText($event) == "halo") {
+
+						$response = $this->bot->replyText($event['replyToken'], "4");
 
 						$this->botSendText($event, "halo juga");
 
