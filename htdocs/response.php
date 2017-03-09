@@ -1,7 +1,8 @@
 <?php
 require_once "database.php";
 
-use LINE\LINEBot\MessageBuilder\TextMessageBuilder;
+use LINE\LINEBot;
+use LINE\LINEBot\MessageBuilder\StickerMessageBuilder;
 use \LINE\LINEBot\SignatureValidator as SignatureValidator;
 
 class Response {
