@@ -1,5 +1,6 @@
 <?php
 use \LINE\LINEBot\SignatureValidator as SignatureValidator;
+require "meme.php";
 
 class Response {
 
@@ -491,6 +492,12 @@ class Response {
 
 				if ($this->botIsReceiveText($event)) {
 
+					$meme = new Meme;
+
+					$response = $meme->mainMeme($this->botReceiveText($event))
+
+					$this->botSendText($event, $response);
+
 					if ($this->botReceiveText($event) == "halo") {
 
 						$this->botSendText($event, "halo juga");
@@ -511,6 +518,8 @@ class Response {
 			if ($this->botEventSourceIsGroup($event)) {
 
 				if ($this->botIsReceiveText($event)) {
+
+
 
 					$text      = str_replace(' ', '+', $this->botReceiveText($event));
 					$url       = "https://dummyimage.com/1024x1024/1abe9c/ffff.jpg&text=$text";
