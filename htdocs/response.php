@@ -499,14 +499,20 @@ class Response {
 
 				if ($this->botIsReceiveText($event)) {
 
-					if ($this->botReceiveText($event) == "halo") {
+					// if ($this->botReceiveText($event) == "halo") {
 
-						$text    = $this->botReceiveText($event);
-						$url     = "https://dummyimage.com/1024x1024/1abe9c/ffff.jpg&text=$text";
-						$prevUrl = "https://dummyimage.com/240x240/1abe9c/ffff.jpg&text=$text";
+					// 	$text    = $this->botReceiveText($event);
+					// 	$url     = "https://dummyimage.com/1024x1024/1abe9c/ffff.jpg&text=$text";
+					// 	$prevUrl = "https://dummyimage.com/240x240/1abe9c/ffff.jpg&text=$text";
 
-						$this->botSendImage($event, $url, $prevUrl);
-					}
+					// 	$this->botSendImage($event, $url, $prevUrl);
+					// }
+
+					$text    = $this->botReceiveText($event);
+					$url     = "https://dummyimage.com/1024x1024/1abe9c/ffff.jpg&text=$text";
+					$prevUrl = "https://dummyimage.com/240x240/1abe9c/ffff.jpg&text=$text";
+
+					$this->botSendImage($event, $url, $prevUrl);
 				}
 
 				if ($this->botIsReceiveSticker($event)) {
