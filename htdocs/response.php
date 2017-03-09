@@ -489,13 +489,19 @@ class Response {
 						// $response = $this->bot->replyText($event['replyToken'], "4");
 
 						$this->botSendText($event, "halo juga");
-
 						return $response->getHTTPStatus().' '.$response->getRawBody();
 					}
-				}
-			}
 
+					if ($this->botIsReceiveSticker($event)) {
+
+						$this->botSendText($event, $this->botReceiveSticker($event));
+
+					}
+				}
+
+			}
 		}
 	}
 }
+
 ?>
