@@ -331,7 +331,7 @@ class Response {
 				fwrite($fp, $response->getRawBody());
 				fclose($fp);
 
-				return "https://dl.abror.net/content/$file";
+				return "https://bot.abror.net/content/$file";
 			}
 		}
 	}
@@ -353,7 +353,7 @@ class Response {
 				fwrite($fp, $response->getRawBody());
 				fclose($fp);
 
-				return "https://dl.abror.net/content/$file";
+				return "https://bot.abror.net/content/$file";
 			}
 		}
 	}
@@ -375,7 +375,7 @@ class Response {
 				fwrite($fp, $response->getRawBody());
 				fclose($fp);
 
-				return "https://dl.abror.net/content/$file";
+				return "https://bot.abror.net/content/$file";
 			}
 		}
 	}
@@ -499,7 +499,7 @@ class Response {
 			// $save->execute();
 
 			$stmt = $this->dbo->prepare("INSERT INTO logs (json) VALUES (?)");
-			$stmt->bindParam(1, json_encode($event));
+			$stmt->bindParam(1, "aa");
 			$stmt->execute();
 
 			// $save = $this->dbo->prepare('INSERT INTO logs(json) VALUES(:json)');
