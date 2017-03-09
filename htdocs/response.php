@@ -501,8 +501,11 @@ class Response {
 
 					if ($this->botReceiveText($event) == "halo") {
 
-						$this->botSendText($event, "halo juga");
-						return $response->getHTTPStatus().' '.$response->getRawBody();
+						$text    = "halo";
+						$url     = "https://dummyimage.com/1024x1024/1abe9c/ffff.jpg&text=$text";
+						$prevUrl = "https://dummyimage.com/240x240/1abe9c/ffff.jpg&text=$text";
+
+						$this->botSendImage($event, $url, $prevUrl);
 					}
 				}
 
@@ -516,12 +519,7 @@ class Response {
 
 				if ($this->botIsReceiveImage($event)) {
 
-					$text    = "hello";
-					$url     = "https://dummyimage.com/1024x1024/1abe9c/ffff.jpg&text=$text";
-					$prevUrl = "https://dummyimage.com/240x240/1abe9c/ffff.jpg&text=$text";
-
-					$this->botSendImage($event, $url, $prevUrl);
-
+					$this->botSendText($event, "Gambar apaan tuh ?");
 				}
 			}
 		}
