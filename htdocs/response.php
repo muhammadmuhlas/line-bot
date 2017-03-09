@@ -1,6 +1,4 @@
 <?php
-require_once "database.php";
-
 use \LINE\LINEBot\SignatureValidator as SignatureValidator;
 
 class Response {
