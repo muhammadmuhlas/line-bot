@@ -500,9 +500,13 @@ class Response {
 			// $save->bindParam('text', $text);
 			// $save->execute();
 
-			$save = $this->dbo->prepare('INSERT INTO logs(json) VALUES(:json)');
-			$save->bindParam(':json', json_encode($event));
-			$save->execute();
+			$stmt = $this->dbo->prepare("INSERT INTO logs (json) VALUES (?)");
+			$stmt->bindParam(1, json_encode($event));
+			$stmt->execute();
+
+			// $save = $this->dbo->prepare('INSERT INTO logs(json) VALUES(:json)');
+			// $save->bindParam(':json', json_encode($event));
+			// $save->execute();
 
 			if ($this->botEventSourceIsUser($event)) {
 
