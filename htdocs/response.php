@@ -487,24 +487,6 @@ class Response {
 				die();
 			}
 
-			// $source_id = $event;
-			// $timestamp = $event;
-			// $text      = $event;
-
-			// $save = $dbo->prepare('INSERT INTO chats (source_id, timestamp, text) VALUES (:source_id, :timestamp, :text)');
-			// $save->bindParam('source_id', $source_id);
-			// $save->bindParam('timestamp', $timestamp);
-			// $save->bindParam('text', $text);
-			// $save->execute();
-
-			// $stmt = $dbo->prepare("INSERT INTO logs (json) VALUES (?)");
-			// $stmt->bindParam(1, "aa");
-			// $stmt->execute();
-
-			// $save = $this->dbo->prepare('INSERT INTO logs(json) VALUES(:json)');
-			// $save->bindParam(':json', json_encode($event));
-			// $save->execute();
-
 			if ($this->botEventSourceIsUser($event)) {
 
 				if ($this->botIsReceiveText($event)) {
@@ -534,7 +516,13 @@ class Response {
 					$url     = "https://dummyimage.com/1024x1024/1abe9c/ffff.jpg&text=$text";
 					$prevUrl = "https://dummyimage.com/240x240/1abe9c/ffff.jpg&text=$text";
 
-					$this->botSendImage($event, $url, $prevUrl);
+					$save = $dbo->prepare('INSERT INTO logs (json) VALUES (:json)');
+					$save->bindParam(':json', "aaa");
+
+					if ($save->execute()) {
+
+						$this->botSendImage($event, $url, $prevUrl);
+					}
 				}
 
 				if ($this->botIsReceiveSticker($event)) {
