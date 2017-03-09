@@ -494,7 +494,9 @@ class Response {
 
 					if ($this->botIsReceiveSticker($event)) {
 
-						$this->botSendText($event, $this->botReceiveSticker($event));
+						$data = $this->botReceiveSticker($event);
+
+						$this->botSendText($event, implode($data));
 
 					}
 				}
