@@ -1,7 +1,6 @@
 <?php
 require_once "database.php";
 
-use LINE\LINEBot\MessageBuilder\TextMessageBuilder;
 use \LINE\LINEBot\SignatureValidator as SignatureValidator;
 
 class Response {
@@ -489,7 +488,7 @@ class Response {
 
 					if ($this->botReceiveText($event) == "halo") {
 
-						// $response = $this->bot->replyText($event['replyToken'], "4");
+						$response = $this->bot->replyText($event['replyToken'], "4");
 
 						$this->botSendText($event, "halo juga");
 
