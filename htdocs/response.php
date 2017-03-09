@@ -207,10 +207,8 @@ class Response {
 	/*Send Content*/
 	public function botSendText($event, $text) {
 
-		// $response = $this->bot->replyText($this->botEventReplyToken($event), $text);
-
-		$input    = new LINE\LINEBot\MessageBuilder\TextMessageBuilder($text);
-		$response = $this->bot->replyMessage($this->botEventReplyToken($event), $input);
+		$input    = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($text);
+		$response = $bot->replyMessage($this->botEventReplyToken($event), $input);
 
 		if ($response->isSucceeded()) {
 
@@ -222,7 +220,7 @@ class Response {
 	public function botSendImage($event, $original, $preview) {
 
 		$input    = new \LINE\LINEBot\MessageBuilder\ImageMessageBuilder($original, $preview);
-		$response = $this->bot->replyMessage($this->botEventReplyToken($event), $input);
+		$response = $bot->replyMessage($this->botEventReplyToken($event), $input);
 
 		if ($response->isSucceeded()) {
 
@@ -233,7 +231,7 @@ class Response {
 	public function botSendVideo($event, $original, $preview) {
 
 		$input    = new \LINE\LINEBot\MessageBuilder\VideoMessageBuilder($original, $preview);
-		$response = $this->bot->replyMessage($this->botEventReplyToken($event), $input);
+		$response = $bot->replyMessage($this->botEventReplyToken($event), $input);
 
 		if ($response->isSucceeded()) {
 
@@ -244,7 +242,7 @@ class Response {
 	public function botSendAudio($event, $content, $duration) {
 
 		$input    = new \LINE\LINEBot\MessageBuilder\AudioMessageBuilder($content, $duration);
-		$response = $this->bot->replyMessage($this->botEventReplyToken($event), $input);
+		$response = $bot->replyMessage($this->botEventReplyToken($event), $input);
 
 		if ($response->isSucceeded()) {
 
@@ -255,7 +253,7 @@ class Response {
 	public function botSendLocation($event, $title, $address, $latitude, $longitude) {
 
 		$input    = new \LINE\LINEBot\MessageBuilder\LocationMessageBuilder($title, $address, $latitude, $longitude);
-		$response = $this->bot->replyMessage($this->botEventReplyToken($event), $input);
+		$response = $bot->replyMessage($this->botEventReplyToken($event), $input);
 
 		if ($response->isSucceeded()) {
 
@@ -266,7 +264,7 @@ class Response {
 	public function botSendSticker($event, $packageId, $stickerId) {
 
 		$input    = new \LINE\LINEBot\MessageBuilder\StickerMessageBuilder($packageId, $stickerId);
-		$response = $this->bot->replyMessage($this->botEventReplyToken($event), $input);
+		$response = $bot->replyMessage($this->botEventReplyToken($event), $input);
 
 		if ($response->isSucceeded()) {
 
@@ -277,7 +275,7 @@ class Response {
 	public function botSendImagemap($event, $baseUrl, $altText, $baseSizeBuilder, array $imagemapActionBuilders) {
 
 		$input    = new ImagemapMessageBuilder($baseUrl, $altText, $baseSizeBuilder, $imagemapActionBuilders);
-		$response = $this->bot->replyMessage($this->botEventReplyToken($event), $input);
+		$response = $bot->replyMessage($this->botEventReplyToken($event), $input);
 
 		if ($response->isSucceeded()) {
 
@@ -288,7 +286,7 @@ class Response {
 	public function botSendTemplate($event, $altText, $templateBuilder) {
 
 		$input    = new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder($altText, $templateBuilder);
-		$response = $this->bot->replyMessage($this->botEventReplyToken($event), $input);
+		$response = $bot->replyMessage($this->botEventReplyToken($event), $input);
 
 		if ($response->isSucceeded()) {
 
