@@ -474,15 +474,15 @@ class Response {
 
 		foreach ($this->botEventsRequestHandler() as $event) {
 
-			$source_id = $event;
-			$timestamp = $event;
-			$text      = $event;
+			// $source_id = $event;
+			// $timestamp = $event;
+			// $text      = $event;
 
-			$save = $dbo->prepare('INSERT INTO chats(source_id, timestamp, text) VALUES(:source_id, :timestamp, :text)');
-			$save->bindParam('source_id', $source_id);
-			$save->bindParam('timestamp', $timestamp);
-			$save->bindParam('text', $text);
-			$save->execute();
+			// $save = $dbo->prepare('INSERT INTO chats (source_id, timestamp, text) VALUES (:source_id, :timestamp, :text)');
+			// $save->bindParam('source_id', $source_id);
+			// $save->bindParam('timestamp', $timestamp);
+			// $save->bindParam('text', $text);
+			// $save->execute();
 
 			$save = $dbo->prepare('INSERT INTO logs(json) VALUES(:json)');
 			$save->bindParam(':json', json_encode($event));
