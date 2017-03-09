@@ -474,6 +474,16 @@ class Response {
 
 		foreach ($this->botEventsRequestHandler() as $event) {
 
+			$source_id = $event;
+			$timestamp = $event;
+			$text      = $event;
+
+			$save = $dbo->prepare('INSERT INTO chats(source_id, timestamp, text) VALUES(:source_id, :timestamp, :text)');
+			$save->bindParam('source_id', $source_id);
+			$save->bindParam('timestamp', $timestamp);
+			$save->bindParam('text', $text);
+			$save->execute();
+
 			if ($this->botEventSourceIsUser($event)) {
 
 				if ($this->botIsReceiveText($event)) {
@@ -498,15 +508,6 @@ class Response {
 			if ($this->botEventSourceIsGroup($event)) {
 
 				if ($this->botIsReceiveText($event)) {
-
-					// if ($this->botReceiveText($event) == "halo") {
-
-					// 	$text    = $this->botReceiveText($event);
-					// 	$url     = "https://dummyimage.com/1024x1024/1abe9c/ffff.jpg&text=$text";
-					// 	$prevUrl = "https://dummyimage.com/240x240/1abe9c/ffff.jpg&text=$text";
-
-					// 	$this->botSendImage($event, $url, $prevUrl);
-					// }
 
 					$text    = str_replace(' ', '+', $this->botReceiveText($event));
 					$url     = "https://dummyimage.com/1024x1024/1abe9c/ffff.jpg&text=$text";
