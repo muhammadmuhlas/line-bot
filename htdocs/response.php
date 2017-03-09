@@ -486,7 +486,7 @@ class Response {
 
 					if ($this->botReceiveText($event) == "halo") {
 
-						$response = $this->bot->replyText($event['replyToken'], "4");
+						// $response = $this->bot->replyText($event['replyToken'], "4");
 
 						$this->botSendText($event, "halo juga");
 
