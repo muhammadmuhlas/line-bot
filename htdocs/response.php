@@ -512,12 +512,12 @@ class Response {
 
 				if ($this->botIsReceiveText($event)) {
 
-					$text    = str_replace(' ', '+', $this->botReceiveText($event));
-					$url     = "https://dummyimage.com/1024x1024/1abe9c/ffff.jpg&text=$text";
-					$prevUrl = "https://dummyimage.com/240x240/1abe9c/ffff.jpg&text=$text";
-
-					$save = $dbo->prepare('INSERT INTO logs (json) VALUES (:json)');
-					$save->bindParam(':json', "aaa");
+					$text      = str_replace(' ', '+', $this->botReceiveText($event));
+					$url       = "https://dummyimage.com/1024x1024/1abe9c/ffff.jpg&text=$text";
+					$prevUrl   = "https://dummyimage.com/240x240/1abe9c/ffff.jpg&text=$text";
+					$jsonEvent = json_encode($event);
+					$sql       = "INSERT INTO 'logs' ('json') VALUES ('$jsonEvent')";
+					$save      = $dbo->prepare($sql);
 
 					if ($save->execute()) {
 
