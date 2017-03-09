@@ -491,14 +491,14 @@ class Response {
 						$this->botSendText($event, "halo juga");
 						return $response->getHTTPStatus().' '.$response->getRawBody();
 					}
+				}
 
-					if ($this->botIsReceiveSticker($event)) {
+				if ($this->botIsReceiveSticker($event)) {
 
-						$data = $this->botReceiveSticker($event);
+					$data = $this->botReceiveSticker($event);
 
-						$this->botSendText($event, implode($data));
+					$this->botSendText($event, json_encode($event));
 
-					}
 				}
 
 			}
