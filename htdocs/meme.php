@@ -92,6 +92,7 @@ public function postImage($JSON_from_server){
 	//todo: sambung ke utama
 	$not_JSON = json_decode($JSON_from_server);
 	$images = $not_JSON["url"];
+	return $images;
 }
 
 public function postList($list) {
@@ -134,7 +135,7 @@ public function mainMeme($text) {
 				$JSON_from_server = getMeme($meme_and_caption);
 				if (memeExist($JSON_from_server)) {
 
-					postImage($JSON_from_server);
+					return postImage($JSON_from_server);
 				} else {
 
 					//send error from JSON
@@ -142,4 +143,5 @@ public function mainMeme($text) {
 			}
 		}
 	}
+	return 'false';
 }
