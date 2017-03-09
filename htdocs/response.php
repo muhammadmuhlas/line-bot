@@ -7,8 +7,24 @@ class Response {
 
 	public $bot;
 	public $request;
+	public $dbo;
 
 	function __construct() {
+
+		$hostname = "localhost";
+		$database = "kotor_line";
+		$username = "kotor";
+		$password = "jokem123";
+
+		try {
+
+			return $this->dbo = new PDO('mysql:host='.$hostname.';dbname='.$database, $username, $password);
+		} catch (PDOException $e) {
+
+			$msg = $e->getMessage();
+			echo $msg;
+			die();
+		}
 
 		$this->request = file_get_contents('php://input');
 
@@ -484,9 +500,9 @@ class Response {
 			// $save->bindParam('text', $text);
 			// $save->execute();
 
-			// $save = $dbo->prepare('INSERT INTO logs(json) VALUES(:json)');
-			// $save->bindParam(':json', json_encode($event));
-			// $save->execute();
+			$save = $this->dbo->prepare('INSERT INTO logs(json) VALUES(:json)');
+			$save->bindParam(':json', json_encode($event));
+			$save->execute();
 
 			if ($this->botEventSourceIsUser($event)) {
 
