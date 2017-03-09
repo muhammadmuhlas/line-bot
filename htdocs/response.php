@@ -489,7 +489,7 @@ class Response {
 
 					$data = $this->botReceiveSticker($event);
 
-					$this->botSendSticker($event, 1, 1);
+					$this->botSendSticker($event, 630, 4);
 
 				}
 
