@@ -474,7 +474,7 @@ class Response {
 
 		foreach ($this->botEventsRequestHandler() as $event) {
 
-			$response = $this->bot->replyText($event['replyToken'], "1");
+			// $response = $this->bot->replyText($event['replyToken'], "1");
 
 			if ($this->botEventSourceIsUser($event)) {
 
