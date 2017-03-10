@@ -497,8 +497,8 @@ class Response {
 
 						// $this->botSendText($event, "halo juga");
 						$generateMeme = new Meme;
-						$response     = $generateMeme->mainMeme($this->botReceiveText($event));
-						$this->botSendText($event, json_encode($generateMeme));
+						$responseMeme = $generateMeme->mainMeme($this->botReceiveText($event));
+						$this->botSendText($event, json_encode($responseMeme));
 					}
 				}
 
