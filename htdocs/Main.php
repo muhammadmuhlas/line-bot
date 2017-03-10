@@ -1,7 +1,4 @@
 <?php
-namespace Main;
-
-use BotResponse\BotResponse;
 
 class Main extends BotResponse {
 
