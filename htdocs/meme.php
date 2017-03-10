@@ -45,7 +45,7 @@ class Meme {
 
 	public function isValidMemeQuery($command) {
 
-		//check if there are exacly 3 SEPARATOR
+		//check if there are exacly 2 SEPARATOR
 		$total_separator = substr_count($command, $this->separator);
 
 		if ($total_separator == 2) {
