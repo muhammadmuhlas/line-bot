@@ -545,12 +545,12 @@ class BotResponse{
 	    $chats = Capsule::table('chats')
             ->where('text', 'LIKE', '%' . $query . '%')
             ->orderBy('id', 'desc')
-            ->limit(5)
+//            ->limit(5)
             ->get();
-        
+
 	    foreach ($chats as $chat){
 
-            return gmdate('Y-m-d\TH:i:s\Z', $chat->timestamp/1000). '\n' . '==>'. $chat->text;
+            return gmdate('Y-m-d H:i:s \U\T\C', $chat->timestamp/1000). "\r\n" . ' ==> '. $chat->text;
         }
 
     }
