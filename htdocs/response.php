@@ -493,16 +493,12 @@ class Response {
 
 				if ($this->botIsReceiveText($event)) {
 
-					$meme = new Meme;
-
-					$response = $meme->mainMeme($this->botReceiveText($event));
-
-					$this->botSendText($event, $response);
-
 					if ($this->botReceiveText($event) == "halo") {
 
-						$this->botSendText($event, "halo juga");
-						return $response->getHTTPStatus().' '.$response->getRawBody();
+						// $this->botSendText($event, "halo juga");
+						$generateMeme = new Meme;
+						$response     = $generateMeme->mainMeme($this->botReceiveText($event));
+						$this->botSendText($event, json_encode($generateMeme));
 					}
 				}
 
