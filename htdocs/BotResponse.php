@@ -542,8 +542,17 @@ class BotResponse{
 
     public function getChatsData($query){
 
-	    $chats = Capsule::table('chats')->where('text', 'LIKE', '%' . $query . '%')->get();
-	    return json_encode($chats);
+	    $chats = Capsule::table('chats')
+            ->where('text', 'LIKE', '%' . $query . '%')
+            ->orderBy('id', 'desc')
+            ->limit(5)
+            ->get();
+	    
+	    $data = array();
+	    foreach ($chats as $chat){
+	        $time = \Carbon\Carbon::parse($chat['timestamp'])->toDayDateTimeString();
+        }
+	    return json_encode($data);
     }
 
     public function IsTextRegexMatchDatabase($event){
