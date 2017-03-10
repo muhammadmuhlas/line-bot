@@ -554,7 +554,7 @@ class BotResponse{
             $text = $text . date('l jS \of F Y h:i:s A', $chat->timestamp/1000);
             $text = $text . "\r\n";
             $text = $text . "=======";
-            $text = $text . $chat.$text;
+            $text = $text . $chat->text;
             $text = $text . "\r\n";
             $text = $text . "=======";
             $text = $text . "\r\n";
