@@ -547,11 +547,10 @@ class BotResponse{
             ->orderBy('id', 'desc')
             ->limit(5)
             ->get();
-
-//	    $data = array();
+        
 	    foreach ($chats as $chat){
 
-            return gmdate('Y-m-d\TH:i:s\Z', $chat->timestamp/1000);
+            return gmdate('Y-m-d\TH:i:s\Z', $chat->timestamp/1000). '\n' . '==>'. $chat->text;
         }
 
     }
