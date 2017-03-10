@@ -540,6 +540,12 @@ class BotResponse{
         }
     }
 
+    public function getChatsData($query){
+
+	    $chats = Capsule::table('chats')->where('text', 'LIKE', "%$query%")->get();
+	    return json_encode($chats);
+    }
+
     public function IsTextRegexMatchDatabase($event){
 
 	    $data_table = Capsule::table('chats')->get('text');

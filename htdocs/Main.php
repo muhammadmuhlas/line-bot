@@ -18,7 +18,12 @@ class Main extends BotResponse {
                         $this->botSendText($event, json_encode($this->generateMeme($event)));
                     }
 
-                    $this->botSendText($event, $this->IsTextRegexMatchCompare($event, '@@a'));
+                    if (strpos($this->botReceiveText($event), 'tugas')){
+
+                        $this->botSendText($event, $this->getChatsData('tugas'));
+                    }
+
+//                    $this->botSendText($event, $this->IsTextRegexMatchCompare($event, '@@a'));
                 }
 
                 if ($this->botIsReceiveSticker($event)) {
