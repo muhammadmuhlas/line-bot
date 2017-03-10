@@ -20,7 +20,7 @@ class Main extends BotResponse {
 
                     if (strpos($this->botReceiveText($event), 'tugas') !== false){
 
-                        $this->botSendText($event, "aa");
+                        $this->botSendText($event, $this->getChatsData('tugas'));
                     }
 
 //                    $this->botSendText($event, $this->IsTextRegexMatchCompare($event, '@@a'));

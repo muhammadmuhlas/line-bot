@@ -542,7 +542,7 @@ class BotResponse{
 
     public function getChatsData($query){
 
-	    $chats = Capsule::table('chats')->get();
+	    $chats = Capsule::table('chats')->where('text', 'LIKE', '%' . $query . '%')->get();
 	    return json_encode($chats);
     }
 
