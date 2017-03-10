@@ -547,16 +547,19 @@ class BotResponse{
             ->orderBy('id', 'desc')
 //            ->limit(5)
             ->get();
-
+        $text = "";
 	    foreach ($chats as $chat){
 
             date_default_timezone_set('Asia/Jakarta');
-            $date = date('l jS \of F Y h:i:s A', $chat->timestamp/1000);
-
-            return $date;
-
-//            return gmdate('Y-m-d H+7:i:s \U\T\C', $chat->timestamp/1000). "\r\n" . ' ==> '. $chat->text;
+            $text = $text . date('l jS \of F Y h:i:s A', $chat->timestamp/1000);
+            $text = $text . "\r\n";
+            $text = $text . "=======";
+            $text = $text . $chat.$text;
+            $text = $text . "\r\n";
+            $text = $text . "=======";
+            $text = $text . "\r\n";
         }
+        return $text;
 
     }
 
