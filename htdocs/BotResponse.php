@@ -550,7 +550,12 @@ class BotResponse{
 
 	    foreach ($chats as $chat){
 
-            return gmdate('Y-m-d H:i:s \U\T\C', $chat->timestamp/1000). "\r\n" . ' ==> '. $chat->text;
+            date_default_timezone_set('Asia/Jakarta');
+            $date = date('l jS \of F Y h:i:s A', $chat->timestamp/1000);
+
+            return $date;
+
+//            return gmdate('Y-m-d H+7:i:s \U\T\C', $chat->timestamp/1000). "\r\n" . ' ==> '. $chat->text;
         }
 
     }
