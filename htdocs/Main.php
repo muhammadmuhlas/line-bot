@@ -1,5 +1,8 @@
 <?php
 require_once "BotResponse.php";
+use Carbon\Carbon;
+
+print_r(Carbon::now());
 class Main extends BotResponse {
 
     public function mainBot() {

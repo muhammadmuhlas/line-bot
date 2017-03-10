@@ -4,7 +4,6 @@ use \LINE\LINEBot\SignatureValidator as SignatureValidator;
 use Illuminate\Database\Capsule\Manager as Capsule;
 use Illuminate\Events\Dispatcher;
 use Illuminate\Container\Container;
-use Carbon\Carbon;
 
 class BotResponse{
 
@@ -12,8 +11,6 @@ class BotResponse{
 	public $request;
 
 	function __construct() {
-
-        echo Carbon::now();
 
         $capsule = new Capsule;
 
@@ -553,8 +550,8 @@ class BotResponse{
 
 //	    $data = array();
 	    foreach ($chats as $chat){
-	        $time = Carbon::now();
-            return $time;
+
+            return gmdate('Y-m-d\TH:i:s\Z', $chat->timestamp);;
         }
 
     }
