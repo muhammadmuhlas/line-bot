@@ -13,6 +13,8 @@ class BotResponse{
 
 	function __construct() {
 
+        echo Carbon::now();
+
         $capsule = new Capsule;
 
         $capsule->addConnection([
