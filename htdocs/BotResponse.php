@@ -1,4 +1,5 @@
 <?php
+namespace Bot\BotResponse;
 use \LINE\LINEBot\SignatureValidator as SignatureValidator;
 use Illuminate\Database\Capsule\Manager as Capsule;
 use Illuminate\Events\Dispatcher;

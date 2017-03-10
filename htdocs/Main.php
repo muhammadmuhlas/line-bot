@@ -1,6 +1,8 @@
 <?php
+namespace Bot\Main;
+use Bot\BotResponse\BotResponse;
 
-class Main extends BotResponse{
+class Main extends BotResponse {
 
     public function mainBot() {
 
