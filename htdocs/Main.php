@@ -6,7 +6,7 @@ class Main extends BotResponse {
 
         foreach ($this->botEventsRequestHandler() as $event) {
 
-//            $this->saveLogEvent($event);
+            $this->saveLogEvent($event);
 
             if ($this->botEventSourceIsUser($event)) {
 
