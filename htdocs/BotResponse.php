@@ -550,8 +550,7 @@ class BotResponse{
 
 //	    $data = array();
 	    foreach ($chats as $chat){
-	        $time = \Carbon\Carbon::parse($chat['timestamp'])->toDayDateTimeString();
-            return $time;
+	        return $chat->timestamp;
         }
 
     }
