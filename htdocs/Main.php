@@ -18,7 +18,7 @@ class Main extends BotResponse {
                         $this->botSendText($event, json_encode($this->generateMeme($event)));
                     }
 
-                    if (strpos($this->botReceiveText($event), 'tugas')){
+                    if (strpos($this->botReceiveText($event), 'tugas') !== false){
 
                         $this->botSendText($event, "aa");
                     }
