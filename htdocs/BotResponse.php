@@ -606,10 +606,10 @@ class BotResponse{
 
         if (preg_match($word, $input)) {
 
-            return "$word";
+            return true;
         }
 
-        return "$word - " . $this->botReceiveText($event);
+//        return "$word - " . $this->botReceiveText($event);
     }
 
 }
