@@ -547,12 +547,13 @@ class BotResponse{
             ->orderBy('id', 'desc')
             ->limit(5)
             ->get();
-	    
-	    $data = array();
+
+//	    $data = array();
 	    foreach ($chats as $chat){
 	        $time = \Carbon\Carbon::parse($chat['timestamp'])->toDayDateTimeString();
+            return $time;
         }
-	    return json_encode($data);
+
     }
 
     public function IsTextRegexMatchDatabase($event){
