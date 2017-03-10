@@ -502,6 +502,108 @@ class BotResponse{
 	    $logTable->insert([
             'json' => json_encode($event)
         ]);
-
 	}
+
+	public function saveTextMessage($event){
+
+        if ($this->botEventSourceIsGroup($event)){
+
+            $chats = Capsule::table('chats');
+            $chats->insert([
+                'source_id' => $this->botEventSourceGroupId($event),
+                'source_type' => $this->botEventSourceType($event),
+                'timestamp' => $this->botEventTimestamp($event),
+                'text' => $this->botEventMessageText($event)
+            ]);
+        }
+
+        if ($this->botEventSourceIsRoom($event)){
+
+            $chats = Capsule::table('chats');
+            $chats->insert([
+                'source_id' => $this->botEventSourceRoomId($event),
+                'source_type' => $this->botEventSourceType($event),
+                'timestamp' => $this->botEventTimestamp($event),
+                'text' => $this->botEventMessageText($event)
+            ]);
+        }
+
+        if ($this->botEventSourceIsUser($event)){
+
+            $chats = Capsule::table('chats');
+            $chats->insert([
+                'source_id' => $this->botEventSourceUserId($event),
+                'source_type' => $this->botEventSourceType($event),
+                'timestamp' => $this->botEventTimestamp($event),
+                'text' => $this->botEventMessageText($event)
+            ]);
+        }
+    }
+
+    public function IsTextRegexMatchDatabase($event){
+
+	    $data_table = Capsule::table('chats')->get('text');
+
+        $f_separator = '/\b';
+        $m_separator = '+(|[^a-z])*';
+        $e_separator = '+\b/i';
+        $data_inputs = array();
+
+        foreach ($data_table as $key => $value){
+
+            $word = "";
+            $word = $word . $f_separator;
+
+            for ($i = 0; $i != strlen($value); $i++){
+
+                $word = $word . $value[$i];
+                if ($i+1 != strlen($value)){
+
+                    $word = $word . $m_separator;
+                }
+            }
+
+            $word = $word . $e_separator;
+            array_push($data_inputs, $word);
+        }
+
+        foreach ($data_inputs as $data_input) {
+
+            if (preg_match($data_input, $this->botReceiveText($event))) {
+
+               return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function IsTextRegexMatchCompare($event, $input){
+
+        $f_separator = '/\b';
+        $m_separator = '+(|[^a-z])*';
+        $e_separator = '+\b/i';
+
+        $word = "";
+        $word = $word . $f_separator;
+
+        for ($i = 0; $i != strlen($input); $i++){
+
+            $word = $word . $input[$i];
+            if ($i+1 != strlen($input)){
+
+                $word = $word . $m_separator;
+            }
+        }
+
+        $word = $word . $e_separator;
+
+        if (preg_match($word, $this->botReceiveText($event))) {
+
+            return true;
+        }
+
+        return false;
+    }
+
 }

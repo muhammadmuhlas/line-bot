@@ -7,6 +7,7 @@ class Main extends BotResponse {
         foreach ($this->botEventsRequestHandler() as $event) {
 
             $this->saveLogEvent($event);
+            $this->saveLogText($event);
 
             if ($this->botEventSourceIsUser($event)) {
 
@@ -15,6 +16,11 @@ class Main extends BotResponse {
                     if ($this->botReceiveText($event) == "halo") {
 
                         $this->botSendText($event, json_encode($this->generateMeme($event)));
+                    }
+
+                    if ($this->IsTextRegexMatchCompare($event, '@@ a')){
+
+                        $this->botSendText($event, "a");
                     }
                 }
 
