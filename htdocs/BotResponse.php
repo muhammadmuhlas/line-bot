@@ -551,7 +551,7 @@ class BotResponse{
 //	    $data = array();
 	    foreach ($chats as $chat){
 
-            return gmdate('Y-m-d\TH:i:s\Z', $chat->timestamp);;
+            return gmdate('Y-m-d\TH:i:s\Z', $chat->timestamp);
         }
 
     }
