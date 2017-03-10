@@ -545,12 +545,12 @@ class BotResponse{
 	    $chats = Capsule::table('chats')
             ->where('text', 'LIKE', '%' . $query . '%')
             ->orderBy('id', 'desc')
-//            ->limit(5)
+            ->limit(5)
             ->get();
         $text = "";
-	    foreach ($chats as $chat){
+        date_default_timezone_set('Asia/Jakarta');
+        foreach ($chats as $chat){
 
-            date_default_timezone_set('Asia/Jakarta');
             $text = $text . date('l jS \of F Y h:i:s A', $chat->timestamp/1000);
             $text = $text . "\r\n";
             $text = $text . "=======";
