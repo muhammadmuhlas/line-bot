@@ -4,6 +4,7 @@ use \LINE\LINEBot\SignatureValidator as SignatureValidator;
 use Illuminate\Database\Capsule\Manager as Capsule;
 use Illuminate\Events\Dispatcher;
 use Illuminate\Container\Container;
+use Carbon\Carbon;
 
 class BotResponse{
 
@@ -550,7 +551,7 @@ class BotResponse{
 
 //	    $data = array();
 	    foreach ($chats as $chat){
-	        $time = \Carbon\Carbon::parse(($chat->timestamp)/1000)->toDayDateTimeString();
+	        $time = Carbon::parse(($chat->timestamp)/1000)->toDayDateTimeString();
             return $time;
         }
 
