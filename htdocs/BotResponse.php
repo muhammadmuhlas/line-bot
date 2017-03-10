@@ -587,10 +587,10 @@ class BotResponse{
         $word = "";
         $word = $word . $f_separator;
 
-        for ($i = 0; $i != strlen($input); $i++){
+        for ($i = 0; $i != strlen($this->botReceiveText($event)); $i++){
 
-            $word = $word . $input[$i];
-            if ($i+1 != strlen($input)){
+            $word = $word . $this->botReceiveText($event)[$i];
+            if ($i+1 != strlen($this->botReceiveText($event))){
 
                 $word = $word . $m_separator;
             }
@@ -598,7 +598,7 @@ class BotResponse{
 
         $word = $word . $e_separator;
 
-        if (preg_match($word, $this->botReceiveText($event))) {
+        if (preg_match($word, $input)) {
 
             return "$word";
         }
