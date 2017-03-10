@@ -2,7 +2,7 @@
 
 /* Load Required Files */
 require __DIR__ . '/../lib/vendor/autoload.php';
-require "response.php";
+require "BotResponse.php";
 
 /* Boot Up Apps*/
 

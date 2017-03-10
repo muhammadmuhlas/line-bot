@@ -20,7 +20,7 @@ class Main extends BotResponse{
 
                 if ($this->botIsReceiveSticker($event)) {
 
-                    $data = $this->botReceiveSticker($event);
+//                    $data = $this->botReceiveSticker($event);
                     $this->botSendSticker($event, 4, 630);
                 }
             }
