@@ -4,6 +4,10 @@
     	"php": ">=5.6",
         "slim/slim": "^3.0",
         "linecorp/line-bot-sdk": "^1.4",
-        "vlucas/phpdotenv": "^2.4"
+        "vlucas/phpdotenv": "^2.4",
+        "intervention/image": "^2.3",
+        "illuminate/database": "^5.4",
+        "illuminate/events": "^5.4",
+        "nesbot/carbon": "^1.22"
     }
 }

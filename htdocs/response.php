@@ -1,14 +1,32 @@
 <?php
 use \LINE\LINEBot\SignatureValidator as SignatureValidator;
+use Illuminate\Database\Capsule\Manager as Capsule;
+use Illuminate\Events\Dispatcher;
+use Illuminate\Container\Container;
 
-require "meme.php";
-
-class Response {
+class BotResponse{
 
 	public $bot;
 	public $request;
 
 	function __construct() {
+
+        $capsule = new Capsule;
+
+        $capsule->addConnection([
+            'driver'    => 'mysql',
+            'host'      => 'localhost',
+            'database'  => 'kotor_line',
+            'username'  => 'kotor',
+            'password'  => 'jokem123',
+            'charset'   => 'utf8',
+            'collation' => 'utf8_unicode_ci',
+            'prefix'    => '',
+        ]);
+
+        $capsule->setEventDispatcher(new Dispatcher(new Container));
+        $capsule->setAsGlobal();
+        $capsule->bootEloquent();
 
 		$this->request = file_get_contents('php://input');
 
@@ -20,11 +38,11 @@ class Response {
 
 		/* Validation */
 		if (empty($signature)) {
-			return $response->withStatus(400, 'Signature not set');
+			return "Siganature not Set";
 		}
 
 		if ($_ENV['PASS_SIGNATURE'] == false && !SignatureValidator::validateSignature($this->request, $_ENV['CHANNEL_SECRET'], $signature)) {
-			return $response->withStatus(400, 'Invalid signature');
+			return "Invalid Signature";
 		}
 
 		/* Initialize bot*/
@@ -469,78 +487,20 @@ class Response {
 		}
 	}
 
-	/*Main*/
-	public function mainBot() {
+    public function generateMeme($event){
 
-		foreach ($this->botEventsRequestHandler() as $event) {
+        $meme = new Meme();
+        $responseMeme = $meme->mainMeme($this->botReceiveText($event));
 
-			$hostname = "localhost";
-			$database = "kotor_line";
-			$username = "kotor";
-			$password = "jokem123";
+        return $responseMeme;
+	}
 
-			try {
+    public function saveLogEvent($event){
 
-				$dbo = new PDO('mysql:host='.$hostname.';dbname='.$database, $username, $password);
-			} catch (PDOException $e) {
+	    $logTable = Capsule::table('logs');
+	    $logTable->insert([
+            'json' => json_encode($event)
+        ]);
 
-				$msg = $e->getMessage();
-				echo $msg;
-				die();
-			}
-
-			if ($this->botEventSourceIsUser($event)) {
-
-				if ($this->botIsReceiveText($event)) {
-
-					if ($this->botReceiveText($event) == "halo") {
-
-						// $this->botSendText($event, "halo juga");
-						$generateMeme = new Meme;
-						$responseMeme = $generateMeme->mainMeme($this->botReceiveText($event));
-						$this->botSendText($event, json_encode($responseMeme));
-					}
-				}
-
-				if ($this->botIsReceiveSticker($event)) {
-
-					$data = $this->botReceiveSticker($event);
-
-					$this->botSendSticker($event, 4, 630);
-
-				}
-
-			}
-
-			if ($this->botEventSourceIsGroup($event)) {
-
-				if ($this->botIsReceiveText($event)) {
-
-					$text      = str_replace(' ', '+', $this->botReceiveText($event));
-					$url       = "https://dummyimage.com/1024x1024/1abe9c/ffff.jpg&text=$text";
-					$prevUrl   = "https://dummyimage.com/240x240/1abe9c/ffff.jpg&text=$text";
-					$jsonEvent = json_encode($event);
-					// $sql       = "INSERT INTO 'logs' ('json') VALUES ('$jsonEvent')";
-					// $save      = $dbo->prepare($sql);
-					// if ($save->execute()) {
-
-					$this->botSendImage($event, $url, $prevUrl);
-					// }
-				}
-
-				if ($this->botIsReceiveSticker($event)) {
-
-					$this->botSendSticker($event, 1, mt_rand(100, 139));
-
-				}
-
-				if ($this->botIsReceiveImage($event)) {
-
-					$this->botSendText($event, "Gambar apaan tuh ?");
-				}
-			}
-		}
 	}
 }
-
-?>
