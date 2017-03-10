@@ -1,5 +1,5 @@
 <?php
-
+require_once "BotResponse.php";
 class Main extends BotResponse {
 
     public function mainBot() {
