@@ -58,6 +58,7 @@ class Meme {
 		//meme_and_caption[1] = caption1
 		//meme_and_caption[2] = caption2
 		$meme_and_caption = explode($this->separator, $command);
+		return $meme_and_caption;
 
 	}
 
@@ -94,9 +95,8 @@ class Meme {
 
 	public function postImage($JSON_from_server) {
 
-		//todo: sambung ke utama
 		$converted_JSON = json_decode($JSON_from_server);
-		$images   = $converted_JSON["url"];
+		$images   = $converted_JSON->data->url;
 		return $images;
 	}
 
@@ -108,13 +108,9 @@ class Meme {
 
 	public function memeExist($JSON_from_server) {
 
-		$not_JSON = json_decode($JSON_from_server);
-		if ($not_JSON["success"] == true) {
+		$converted_JSON = (array) json_decode($JSON_from_server);
+		return $converted_JSON["success"];
 
-			return true;
-		}
-
-		return false;
 	}
 
 	public function mainMeme($text) {
