@@ -1,5 +1,14 @@
 <?php
-
+/*
+	Meme Generator
+	Input (String):
+		List : '@meme list'
+		Image: '@meme <id>;<caption1>;<caption2>'
+	Output (Object):
+		->type (String, only contains 'list','image', or 'error')
+		->content (array of object for 'list', string for 'image', and string for 'error')
+	WILL RETURN BOOLEAN FALSE IF NOT AN '@meme ' QUERY 
+*/
 class Meme {
 
 	private $separator;
@@ -16,14 +25,14 @@ class Meme {
 
 	public function isValidQuery($text) {
 
-		if (strlen($text) <= 5) {
+		if (strlen($text) <= 6) {
 
 			return false;
 		}
 
-		$prefix = substr($text, 0, 5);
+		$prefix = substr($text, 0, 6);
 
-		if ($prefix == 'meme ') {
+		if ($prefix == '@meme ') {
 
 			return true;
 		}
@@ -65,7 +74,6 @@ class Meme {
 	public function getMeme($meme_and_caption) {
 
 		//output: JSON
-		//todo: check in api
 		$url  = 'https://api.imgflip.com/caption_image';
 		$data = array(
 			'template_id' => $meme_and_caption[0],
@@ -90,41 +98,71 @@ class Meme {
 
 	public function getList() {
 
-		//todo: check in api
+		$url  = 'https://api.imgflip.com/get_memes';
+		$result  = file_get_contents($url);
+		//output: JSON
+		return $result;
 	}
 
-	public function postImage($JSON_from_server) {
+	public function postImage($url) {
+
+		$result = new stdClass();
+		$result->type = 'image';
+		$result->content = $url;
+		return $result;
+	}
+
+	public function postError($error_message) {
+
+		$result = new stdClass();
+		$result->type = 'error';
+		$result->content = $error_message;
+		return $result;
+	}
+
+	public function postRequestedImage($JSON_from_server) {
 
 		$converted_JSON = json_decode($JSON_from_server);
-		$images   = $converted_JSON->data->url;
-		return $images;
+		$image_url   = $converted_JSON->data->url;
+		return $this->postImage($image_url);
 	}
 
-	public function postList($list) {
+	public function postList($list_JSON) {
 
-		//list in JSON
-		//todo : check api, sambung ke utama
+		//input: JSON
+		$converted_JSON = json_decode($list_JSON);
+		
+		if ($converted_JSON->success == false) {
+			return $this->postError('Failed to get meme list.');
+		}
+
+		//output : array of object
+		//each object's element: id,name,url,width,height
+		$result = new stdClass();
+		$result->type = 'list';
+		$result->content = $converted_JSON->data->memes;
+		return $result;
 	}
 
 	public function memeExist($JSON_from_server) {
 
-		$converted_JSON = (array) json_decode($JSON_from_server);
-		return $converted_JSON["success"];
+		$converted_JSON = json_decode($JSON_from_server);
+		return $converted_JSON->success;
 
 	}
 
 	public function mainMeme($text) {
 
 		if ($this->isValidQuery($text)) {
-			$command      = substr($text, 5);
+			
+			$command      = substr($text, 6);
 			$command_type = $this->checkCommand($command);
-			//if ($command_type == 'list') {
+			
+			if ($command_type == 'list') {
 
-			//get list JSON
-			//	$list = getList();
-			//post list to user
-			//	postList($list);
-			//}
+				$list = $this->getList();
+				return $this->postList($list);
+			}
 
 			if ($command_type = 'create_meme') {
 
@@ -135,16 +173,21 @@ class Meme {
 					
 					if ($this->memeExist($JSON_from_server)) {
 
-						return $this->postImage($JSON_from_server);
+						return $this->postRequestedImage($JSON_from_server);
 					} 
 
-					//else {
-
-						//send error from JSON
-					//}
+					$error_message = json_decode($JSON_from_server);
+					return $this->postError($error_message);
 				}
+
+				return $this->postError('Invalid query. Use "@meme list" if you want to check the meme list, or "@meme id;caption1;caption2" if you want to create meme.');
 			}
+
 		}
-		return 'false';
+		return false;
 	}
 }
+
+//test
+//$meme = new Meme;
+//echo var_dump($meme->mainMeme('@meme lista'));
