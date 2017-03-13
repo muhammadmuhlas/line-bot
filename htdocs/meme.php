@@ -27,25 +27,21 @@ class Meme {
 
 			return true;
 		}
-
 		return false;
 	}
 
 	public function checkCommand($command) {
 
-		//list
 		if ($command == 'list') {
 
 			return 'list';
 		}
-
-		//create meme
 		return 'create_meme';
 	}
 
 	public function isValidMemeQuery($command) {
 
-		//check if there are exacly 2 SEPARATOR
+		//check if there are exacly 2 separator
 		$total_separator = substr_count($command, $this->separator);
 
 		if ($total_separator == 2) {
@@ -80,7 +76,7 @@ class Meme {
 
 		$options = array(
 			'http' => array(
-				//'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+				'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
 				'method'  => 'POST',
 				'content' => http_build_query($data),
 			),
@@ -99,8 +95,8 @@ class Meme {
 	public function postImage($JSON_from_server) {
 
 		//todo: sambung ke utama
-		$not_JSON = json_decode($JSON_from_server);
-		$images   = $not_JSON["url"];
+		$converted_JSON = json_decode($JSON_from_server);
+		$images   = $converted_JSON["url"];
 		return $images;
 	}
 
@@ -136,18 +132,20 @@ class Meme {
 
 			if ($command_type = 'create_meme') {
 
-				//check if valid create query
 				if (isValidMemeQuery($command)) {
 
 					$meme_and_caption = getMemeAndCaption($command);
 					$JSON_from_server = getMeme($meme_and_caption);
+					
 					if (memeExist($JSON_from_server)) {
 
 						return postImage($JSON_from_server);
-					} else {
+					} 
+
+					//else {
 
 						//send error from JSON
-					}
+					//}
 				}
 			}
 		}
