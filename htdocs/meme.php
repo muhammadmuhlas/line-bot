@@ -119,9 +119,9 @@ class Meme {
 
 	public function mainMeme($text) {
 
-		if (isValidQuery($text)) {
+		if ($this->isValidQuery($text)) {
 			$command      = substr($text, 5);
-			$command_type = checkCommand($command);
+			$command_type = $this->checkCommand($command);
 			//if ($command_type == 'list') {
 
 			//get list JSON
@@ -132,14 +132,14 @@ class Meme {
 
 			if ($command_type = 'create_meme') {
 
-				if (isValidMemeQuery($command)) {
+				if ($this->isValidMemeQuery($command)) {
 
-					$meme_and_caption = getMemeAndCaption($command);
-					$JSON_from_server = getMeme($meme_and_caption);
+					$meme_and_caption = $this->getMemeAndCaption($command);
+					$JSON_from_server = $this->getMeme($meme_and_caption);
 					
-					if (memeExist($JSON_from_server)) {
+					if ($this->memeExist($JSON_from_server)) {
 
-						return postImage($JSON_from_server);
+						return $this->postImage($JSON_from_server);
 					} 
 
 					//else {
